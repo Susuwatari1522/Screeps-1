@@ -9,7 +9,6 @@ module.exports = {
       creep.memory.working = false;
     }
     else if (creep.memory.working === false && creepCarryUsedCapacity == creepCarryCapacity) {
-      creep.memory.withdrawId = "";
       creep.memory.working = true;
     }
 
@@ -17,7 +16,6 @@ module.exports = {
     if (flag) {
       if (flag.room) {
         if (creep.room.name == flag.room.name) {
-          creep.say(flag.room)
           if (creep.memory.working === false) {
             withdrawModule.run(creep);
           }

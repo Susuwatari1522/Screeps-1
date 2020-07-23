@@ -126,6 +126,7 @@ module.exports.loop = function() {
     }
   }
 
+
   function runCreeps() {
     for (let name in Game.creeps) {
       let creep = Game.creeps[name];
@@ -447,7 +448,7 @@ module.exports.loop = function() {
 
 
           if (flagMemory.sources) {
-            if (Game.time % 5000 == 0 || (!flagMemory.roomManager.headSpawn)) {
+            if (Game.time % 5000 == 0 || (!flagMemory.roomManager.headSpawn && room.spawns.length > 0)) {
               console.log(`Memory in ${roomName} is being updated!`)
               if (!flagMemory.roomManager.headSpawn) {
                 if (room.spawns.length > 1) {
@@ -486,14 +487,13 @@ module.exports.loop = function() {
           function runRoomPlanner() {
             if (flagMemory.controllerLevel < room.controller.level) {
               if (flagMemory.roomManager.headSpawn) {
-                roomPlanner.run()
                 roomManager.run(roomName)
-                flagMemory.controllerLevel = room.controller.level;
               }
+              roomPlanner.run()
+              flagMemory.controllerLevel = room.controller.level;
             }
             if (Game.time % 500 == 0) {
               roomManager.run(roomName)
-              flagMemory.controllerLevel = room.controller.level;
             }
           }
 

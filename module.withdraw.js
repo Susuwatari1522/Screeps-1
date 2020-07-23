@@ -35,7 +35,7 @@ module.exports = {
       const target = Game.getObjectById(flagMemory.controllerStorage);
       if (!target) {
         if (creep.room.controller) {
-          let range = 3;
+          let range = 5;
           let containerInRange = creep.room.controller.pos.findInRange(creep.room.containers, range,
             {filter: {structureType: STRUCTURE_CONTAINER}
           })[0];
@@ -165,26 +165,25 @@ module.exports = {
       }
 
 
-
       if (creep.memory.role !== "transferer") {
         if (!checkContainers())
         if (!checkTerminal())
         if (!checkStorage())
         if (!checkLinks()) {
-          if (creep.memory.role !== "transferer") {
-            creep.memory.withdrawId = "source"
-          }
+          creep.memory.withdrawId = "source";
         }
       }
       else {
         if (!checkStorage())
         if (!checkTerminal())
         if (!checkContainers())
-        if (!checkLinks())
+        if (!checkLinks()) {
+
+        }
       }
 
 
-
+      if (withdrawStructure !== null)
       creep.say(withdrawStructure)
 
       return withdrawStructure;
